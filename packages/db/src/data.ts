@@ -42,7 +42,7 @@ export const posts: Post[] = [
     description,
     content: content + " ... post1",
     imageUrl:
-      "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&auto=format&fit=crop&w=3603&q=80",
+      "",
     date: new Date("Apr 18, 2022"),
     category: "Node",
     tags: "Back-End,Databases",
