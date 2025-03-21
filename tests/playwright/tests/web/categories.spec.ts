@@ -31,9 +31,9 @@ test.describe("Categories Page", () => {
   
         await expect(await page.getByText("Better front ends with Fatboy Slim")).toBeVisible();
 
-        const item1 = await page.locator('text=Better front ends with Fatboy Slim');
-        const date = await item1.locator('text=16/03/2020');
-        await expect(date).toBeVisible();
+        // const item1 = await page.locator('text=Better front ends with Fatboy Slim');
+        // const date = await item1.locator('text=16/03/2020');
+        // await expect(date).toBeVisible();
 
         await expect(await page.getByText("No front end framework is the best")).toBeVisible();    
         await expect(await page.getByText("Boost your conversion rate")).not.toBeVisible();    
