@@ -1,3 +1,4 @@
+'use client';
 interface UnhideButtonProps {
     count: number;
     onUnhide: () => void;

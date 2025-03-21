@@ -1,36 +1,14 @@
-'use client';
 import { posts } from "@repo/db/data"
 import { toUrlPath } from "@repo/utils/url";
-import { useParams } from 'next/navigation';
-import { useHiddenPosts } from '@/hooks/useHiddenPosts';
-import { PostList } from '@/components/post/PostList';
-import { UnhideButton } from '@/components/ui/UnhideButton';
+import { CategoryContent } from '@/components/post/CategoryContent';
 
-export default function CategoryPage() {
-    const params = useParams();
-    const name = params.name as string;
-    const { hiddenPosts, hidePost, unhideAll } = useHiddenPosts(name);
-    
-    const filteredPosts = posts.filter(post => 
-        toUrlPath(post.category) === name && 
-        post.active && 
-        !hiddenPosts.has(post.id)
-    );
+export async function generateStaticParams() {
+    const categories = new Set(posts.map(post => toUrlPath(post.category)));
+    return Array.from(categories).map((category) => ({
+        name: category,
+    }));
+}
 
-    return (
-        <div>
-            <h1>Category: {name}</h1>
-            {hiddenPosts.size > 0 && (
-                <UnhideButton 
-                    count={hiddenPosts.size} 
-                    onUnhide={unhideAll} 
-                />
-            )}
-            <PostList 
-                posts={filteredPosts}
-                onHidePost={hidePost}
-                showHideButton={true}
-            />
-        </div>
-    );
+export default function CategoryPage({ params }: { params: { name: string } }) {
+    return <CategoryContent name={params.name} />;
 }

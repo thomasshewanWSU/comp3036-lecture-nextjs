@@ -1,15 +1,21 @@
-'use client'
 import { posts } from "@repo/db/data"
 import { parse } from "marked";
-import {PostImage} from "@/components/post/PostImage";
-import { useParams } from 'next/navigation';
+import { PostImage } from "@/components/post/PostImage";
 
-export default function Page() {
-    const params = useParams();
-    const urlId = params.urlid as string;
-    const post = posts.find((post) => { return post.urlId === urlId})
+// This runs at build time
+export async function generateStaticParams() {
+    return posts
+        .filter(post => post.active)
+        .map((post) => ({
+            urlid: post.urlId,
+        }));
+}
 
-    if (post == null) {
+// This becomes a static page
+export default function Page({ params }: { params: { urlid: string } }) {
+    const post = posts.find((post) => post.urlId === params.urlid);
+
+    if (!post) {
         return <div>Post not found - Do not modify URL</div>;
     }
    
@@ -19,7 +25,5 @@ export default function Page() {
             <div dangerouslySetInnerHTML={{__html: parse(post.content)}} /> 
             <PostImage post={post} />
         </div>
-        // Using dangerouslySetInnerHTML to prevent attacks??
     );
-
 }

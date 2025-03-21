@@ -1,3 +1,4 @@
+'use client';
 import Image from "next/image";
 import { Post } from "@repo/db/data";
 import { useEffect, useState } from "react";
@@ -27,12 +28,7 @@ export function PostImage({ post }: { post: Post }) {
             src={imageUrl || '/placeHolder.webp'} 
             alt={post.title} 
             width={300} 
-            height={400} 
-            style={{ 
-                objectFit: 'cover',
-                width: 'auto', 
-                height: 'auto'
-            }}
+            height={400}
             priority={true}
         />
     );

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Post } from "@repo/db/data";
 import { PostMetadata } from "./PostMetadata";
