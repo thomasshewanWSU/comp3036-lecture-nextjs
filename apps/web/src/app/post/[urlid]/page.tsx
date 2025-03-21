@@ -1,6 +1,6 @@
 import { posts } from "@repo/db/data"
 import { parse } from "marked";
-
+import Image from "next/image";
 export default async function Page({params}: {params: {urlid: string}}) {
     const { urlid } = await params;
 
@@ -12,8 +12,14 @@ export default async function Page({params}: {params: {urlid: string}}) {
 
     return (
         <div>
-            <h1>{post.title}</h1>
-            <div dangerouslySetInnerHTML={{__html: parse(post.content)}} /> 
+            <h1 className="post-title">{post.title}</h1>
+            {/* <div dangerouslySetInnerHTML={{__html: parse(post.content)}} />  */}
+            <Image 
+                src={post.imageUrl || '/placeHolder.webp'} 
+                alt={post.title} 
+                width={500} 
+                height={500}
+            />
         </div>
         // Using dangerouslySetInnerHTML to prevent attacks??
     );

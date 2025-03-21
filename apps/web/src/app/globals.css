@@ -27,7 +27,9 @@ html[data-theme="dark"] {
 html {
   background: var(--background);
 }
-
+.post-title {
+  font-family: var(--font-press-start-2p), sans-serif;
+}
 @theme inline {
   --color-primary: var(--text);
   --color-primaryHover: var(--textHover);
